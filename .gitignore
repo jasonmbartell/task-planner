@@ -38,6 +38,8 @@ pnpm-debug.log*
 
 # Testing
 coverage/
+test-results/
+playwright-report/
 
 # Claude Code (local, machine-specific settings)
 .claude/settings.local.json
