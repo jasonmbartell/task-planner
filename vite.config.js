@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite'
+import { configDefaults } from 'vitest/config'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
@@ -89,5 +90,11 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: true,
+  },
+  test: {
+    // Playwright e2e specs live in tests/ and use @playwright/test, which
+    // throws under the vitest runner. Keep them out of vitest; run them via
+    // `npx playwright test`. Unit tests live in src/**/__tests__.
+    exclude: [...configDefaults.exclude, 'tests/**'],
   },
 })
