@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+# Pre-push hook — refuses pushing a `claude/*` branch to `main` on the remote.
+#
+# Rationale (CLAUDE_AGENT_PROTOCOL.md §7): schema / agent-channel changes live
+# on `claude/agent-*` feature branches. The maintainer reviews and merges into main;
+# the agent never pushes directly. This hook enforces that invariant on the
+# client side so a stray `git push origin HEAD:main` can't sneak through.
+#
+# Install once: `npm run hooks:install` (sets core.hooksPath to this dir).
+#
+# Input contract (git hooks docs): stdin receives one line per pushed ref:
+#   <local_ref> <local_sha> <remote_ref> <remote_sha>
+# A deletion (remote_sha of zeros) is allowed — we only block real pushes to
+# refs/heads/main that come from a claude/* local branch.
+
+set -eu
+
+ZERO_SHA="0000000000000000000000000000000000000000"
+
+while read -r local_ref local_sha remote_ref remote_sha; do
+  # Skip deletions (local_sha is all zeros means "delete remote ref")
+  if [ "$local_sha" = "$ZERO_SHA" ]; then
+    continue
+  fi
+
+  # Only care about pushes targeting main on the remote.
+  case "$remote_ref" in
+    refs/heads/main|refs/heads/master) ;;
+    *) continue ;;
+  esac
+
+  # Derive local branch name for this push. `local_ref` is `refs/heads/<name>`
+  # for a normal branch push; may be empty on some push forms, in which case
+  # fall back to the currently-checked-out branch.
+  local_branch="${local_ref#refs/heads/}"
+  if [ -z "$local_branch" ] || [ "$local_branch" = "$local_ref" ]; then
+    local_branch="$(git symbolic-ref --quiet --short HEAD 2>/dev/null || echo '')"
+  fi
+
+  case "$local_branch" in
+    claude/*)
+      cat >&2 <<EOF
+
+[pre-push] refusing push from '$local_branch' to '$remote_ref'.
+
+Claude agent branches (claude/*) must land on main via a reviewed PR,
+not a direct push. See CLAUDE_AGENT_PROTOCOL.md §7.
+
+To override for an emergency (don't — ask the maintainer instead):
+  git push --no-verify <remote> <refspec>
+EOF
+      exit 1
+      ;;
+  esac
+done
+
+exit 0

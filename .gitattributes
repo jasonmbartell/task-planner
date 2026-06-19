@@ -1,0 +1,5 @@
+# Keep shell scripts LF-only so they parse on Unix + WSL + git-bash.
+# Windows git may otherwise convert EOLs on checkout, which breaks the
+# pre-push hook's `set -eu` / `read` loop.
+scripts/hooks/* text eol=lf
+*.sh text eol=lf

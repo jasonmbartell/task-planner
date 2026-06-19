@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Full bleed background for maskable safe zone -->
+  <rect width="512" height="512" fill="#0b1220"/>
+  <!-- Content scaled to 80% safe zone (51.2px padding each side) -->
+  <g transform="translate(64, 64) scale(0.75)">
+    <rect x="80" y="120" width="352" height="56" rx="12" fill="#162440"/>
+    <rect x="80" y="228" width="352" height="56" rx="12" fill="#162440"/>
+    <rect x="80" y="336" width="352" height="56" rx="12" fill="#162440"/>
+    <!-- Checkmark on first row -->
+    <circle cx="130" cy="148" r="20" fill="#1e2f4d" stroke="#d4a843" stroke-width="3"/>
+    <polyline points="118,148 127,157 143,139" fill="none" stroke="#d4a843" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="170" y="136" width="200" height="24" rx="6" fill="#d4a843" opacity="0.9"/>
+    <!-- Checkmark on second row -->
+    <circle cx="130" cy="256" r="20" fill="#1e2f4d" stroke="#33a85a" stroke-width="3"/>
+    <polyline points="118,256 127,265 143,247" fill="none" stroke="#33a85a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="170" y="244" width="160" height="24" rx="6" fill="#33a85a" opacity="0.9"/>
+    <!-- Empty circle on third row -->
+    <circle cx="130" cy="364" r="20" fill="#1e2f4d" stroke="#3a7cc2" stroke-width="3"/>
+    <rect x="170" y="352" width="240" height="24" rx="6" fill="#3a7cc2" opacity="0.9"/>
+  </g>
+</svg>
