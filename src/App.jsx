@@ -229,7 +229,7 @@ export default function App() {
           {view === 'appearance' && <AppearanceSettings />}
           {view === 'agent-inbox' && <AgentInbox service={agentInboxRef.current} store={useStore} />}
           {view === 'agent-digest' && <AgentDigest service={agentDigestRef.current} onTaskClick={setEditTask} onProjectClick={handleProjectClick} />}
-          {view === 'sync' && <ConnectStorage connectGoogle={sync.connectGoogle} connectMicrosoft={sync.connectMicrosoft} disconnect={sync.disconnect} />}
+          {view === 'sync' && <ConnectStorage connectGoogle={sync.connectGoogle} disconnect={sync.disconnect} />}
           {view === 'dashboard' && selectedProject && (
             <ProjectDashboard
               project={selectedProject}

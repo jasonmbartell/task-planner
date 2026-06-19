@@ -2,11 +2,9 @@ import { useEffect, useRef, useCallback } from 'react';
 import useStore, { getSerializableState } from '../store/useStore';
 import { LocalAdapter } from '../storage/localAdapter.js';
 import { DriveAdapter } from '../storage/driveAdapter.js';
-import { OneDriveAdapter } from '../storage/oneDriveAdapter.js';
 import { SyncManager } from '../storage/syncManager.js';
 import { getTokens, clearTokens } from '../auth/tokenStore.js';
 import { startGoogleAuth, handleGoogleCallback, getPkceStorage } from '../auth/google.js';
-import { startMicrosoftAuth, handleMicrosoftCallback } from '../auth/microsoft.js';
 import { AuthExpiredError } from '../auth/errors.js';
 import {
   migrateFromLocalStorage,
@@ -81,8 +79,6 @@ export function useSync() {
           try {
             if (provider === 'google') {
               await handleGoogleCallback(code, state);
-            } else if (provider === 'microsoft') {
-              await handleMicrosoftCallback(code, state);
             }
           } catch (err) {
             console.error('[useSync] OAuth callback failed:', err);
@@ -92,9 +88,9 @@ export function useSync() {
         }
 
         // In Tauri, register the deep-link handler so OAuth callbacks return
-        // via com.taskplanner.app:/auth/callback (see src/auth/google.js,
-        // microsoft.js). Google's iOS OAuth client requires the scheme to
-        // match the bundle ID exactly.
+        // via com.taskplanner.app:/auth/callback (see src/auth/google.js).
+        // Google's iOS OAuth client requires the scheme to match the bundle
+        // ID exactly.
         if (isTauri()) {
           try {
             const dl = await import('@tauri-apps/plugin-deep-link');
@@ -123,8 +119,6 @@ export function useSync() {
                 console.log('[useSync] Exchanging deep-link code for', provider, 'tokens');
                 if (provider === 'google') {
                   await handleGoogleCallback(dlCode, dlState);
-                } else if (provider === 'microsoft') {
-                  await handleMicrosoftCallback(dlCode, dlState);
                 } else {
                   console.warn('[useSync] No oauth_provider stored — cannot exchange code');
                   return;
@@ -165,12 +159,6 @@ export function useSync() {
           if (googleTokens) {
             cloudAdapter = new DriveAdapter();
             useStore.getState().setCloudProvider('google');
-          } else {
-            const msTokens = await getTokens('microsoft');
-            if (msTokens) {
-              cloudAdapter = new OneDriveAdapter();
-              useStore.getState().setCloudProvider('microsoft');
-            }
           }
         } catch (err) {
           console.error('[useSync] Failed to check cloud tokens:', err);
@@ -401,10 +389,6 @@ export function useSync() {
     startGoogleAuth();
   }, []);
 
-  const connectMicrosoft = useCallback(() => {
-    startMicrosoftAuth();
-  }, []);
-
   const disconnect = useCallback(async (provider) => {
     await clearTokens(provider);
     window.location.reload();
@@ -465,5 +449,5 @@ export function useSync() {
     }
   }, []);
 
-  return { connectGoogle, connectMicrosoft, disconnect, refresh };
+  return { connectGoogle, disconnect, refresh };
 }

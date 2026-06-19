@@ -1,7 +1,7 @@
 import { Cloud, CloudOff, Loader2 } from 'lucide-react';
 import useStore from '../store/useStore';
 
-export default function ConnectStorage({ connectGoogle, connectMicrosoft, disconnect }) {
+export default function ConnectStorage({ connectGoogle, disconnect }) {
   const cloudProvider = useStore((s) => s.cloudProvider);
   const cloudVerified = useStore((s) => s.cloudVerified);
   // Hold "Verifying…" until the first cloud round-trip succeeds — otherwise
@@ -10,7 +10,6 @@ export default function ConnectStorage({ connectGoogle, connectMicrosoft, discon
   // cloudProvider entirely and the user falls through to the Connect button.
   const googleConnected = cloudProvider === 'google' && cloudVerified;
   const googleVerifying = cloudProvider === 'google' && !cloudVerified;
-  const microsoftConnected = cloudProvider === 'microsoft' && cloudVerified;
 
   return (
     <div className="p-5 space-y-5 max-w-lg">
@@ -82,22 +81,6 @@ export default function ConnectStorage({ connectGoogle, connectMicrosoft, discon
                 Checking your Google Drive credentials… If they've been revoked you'll be asked to reconnect.
               </p>
             )}
-          </div>
-
-          {/* OneDrive — disabled, not yet configured */}
-          <div className="p-3 bg-surface-1 border border-accent-cream/5 space-y-3 opacity-40">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <CloudOff className="w-4 h-4 text-accent-cream/20" />
-                <span className="text-xs text-accent-cream/40 font-mono uppercase tracking-wider">OneDrive</span>
-              </div>
-              <span className="px-3 py-1.5 text-[10px] text-accent-cream/30 font-mono uppercase tracking-wider border border-accent-cream/10">
-                Coming Soon
-              </span>
-            </div>
-            <p className="text-[10px] text-accent-cream/20 font-mono leading-relaxed">
-              OneDrive sync requires an Azure AD app registration. Setup instructions in the README.
-            </p>
           </div>
         </div>
 

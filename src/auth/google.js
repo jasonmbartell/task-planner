@@ -12,8 +12,7 @@ function getRedirectUri() {
   // In Tauri (dev or production), use the reversed-bundle-id custom scheme.
   // Google's iOS OAuth client requires the redirect URI's scheme to match the
   // registered bundle ID exactly (com.taskplanner.app — see tauri.conf.json
-  // identifier and the deep-link plugin's schemes list). Microsoft accepts
-  // arbitrary schemes, so we reuse the same one for both providers.
+  // identifier and the deep-link plugin's schemes list).
   if (isTauri()) {
     return 'com.taskplanner.app:/auth/callback';
   }

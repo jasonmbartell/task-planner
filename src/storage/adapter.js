@@ -1,5 +1,5 @@
 /**
- * Abstract storage adapter. All adapters (IndexedDB, Google Drive, OneDrive)
+ * Abstract storage adapter. All adapters (IndexedDB, Google Drive)
  * implement this interface so the SyncManager can treat them uniformly.
  */
 export class StorageAdapter {

@@ -1,14 +1,14 @@
 /**
  * Typed errors for the OAuth / cloud-sync stack.
  *
- * Kept as a separate module so auth code (google.js / microsoft.js), storage
- * adapters (driveAdapter / oneDriveAdapter), the SyncManager, and the React
+ * Kept as a separate module so auth code (google.js), storage
+ * adapters (driveAdapter), the SyncManager, and the React
  * sync hook can all instanceof-check without importing each other.
  */
 
 /**
  * Thrown when an OAuth refresh-token request returns `invalid_grant` —
- * meaning Google or Microsoft has revoked or expired the refresh token and
+ * meaning Google has revoked or expired the refresh token and
  * no number of retries will succeed. The UI should drop the cloud session
  * (clear tokens, null `cloudProvider`, set syncStatus='error') so the
  * "Connected" badge stops lying and the user can click Connect again.

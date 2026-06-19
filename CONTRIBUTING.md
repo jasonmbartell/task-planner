@@ -4,6 +4,8 @@ Thanks for your interest in contributing! This guide covers how to set up the pr
 
 ## Development Setup
 
+**Prerequisites:** [Node.js 18 or newer](https://nodejs.org/) (bundles `npm`). Working on the native desktop build additionally needs the Rust toolchain and Tauri CLI — see [Prerequisites in the README](README.md#prerequisites).
+
 ```bash
 git clone <repo-url>
 cd task-planner

@@ -70,7 +70,7 @@ const useStore = create(
       },
       _hydrated: false,
       syncStatus: 'idle',
-      cloudProvider: null, // 'google' | 'microsoft' | null
+      cloudProvider: null, // 'google' | null
       // Per-session — flips true after the first successful cloud round-trip.
       // ConnectStorage shows "Verifying…" while cloudProvider is set but this
       // is still false, so the green "Connected" badge never paints over an
