@@ -9,7 +9,7 @@
  *
  * Schema migrations ride along with on-disk data for the lifetime of the app;
  * a non-idempotent one silently corrupts data on re-hydration. This file is
- * the "cheap automated check" side of CLAUDE_AGENT_PROTOCOL.md §7.
+ * the cheap automated check that guards against that.
  */
 
 import { describe, it, expect } from 'vitest';

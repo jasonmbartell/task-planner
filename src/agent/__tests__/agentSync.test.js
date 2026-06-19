@@ -97,7 +97,7 @@ describe('AgentSync', () => {
     expect(fake.api.listen.mock.calls[0][0]).toBe(__TEST_ONLY__.EVENT_NAME);
 
     fake.emit('C:\\planner-data\\agent-inbox\\op-1.json');
-    // The design doc's "Done when" string is "agent op received".
+    // The expected log line is "agent op received".
     const logged = logger.log.mock.calls.map((c) => c.join(' ')).join('\n');
     expect(logged).toMatch(/agent op received/);
     expect(logged).toMatch(/op-1\.json/);

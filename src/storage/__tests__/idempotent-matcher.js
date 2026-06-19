@@ -15,8 +15,6 @@
  *
  * Import from test files: `import './idempotent-matcher.js'` (side-effect
  * registers with vitest's expect). Consumers may re-import without cost.
- *
- * Developer-channel nicety (CLAUDE_AGENT_PROTOCOL.md §7 / Milestone 7).
  */
 
 import { expect } from 'vitest';

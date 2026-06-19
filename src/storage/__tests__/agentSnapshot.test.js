@@ -31,7 +31,7 @@ const seed = () => ({
 });
 
 describe('buildSnapshot', () => {
-  it('produces the protocol §3 top-level shape', () => {
+  it('produces the documented top-level shape', () => {
     const snap = buildSnapshot(seed(), { exportedAt: 42 });
     expect(snap.schemaVersion).toBe(SNAPSHOT_SCHEMA_VERSION);
     expect(snap.exportedAt).toBe(42);

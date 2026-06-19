@@ -13,8 +13,6 @@
  * 4. Apply null defaults.
  * 5. Infer start/end dates from difficulty.
  * 6. Resolve dependency references (titles → IDs).
- *
- * See docs/prose-ingestion.md for the prose path's design.
  */
 
 import { parseMarkdownFile } from './parseDeterministic.js';

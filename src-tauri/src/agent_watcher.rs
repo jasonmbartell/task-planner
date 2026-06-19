@@ -4,8 +4,6 @@
 //! modified by Claude (or any other agent), and emits an `agent-inbox:op`
 //! Tauri event carrying the absolute path of the detected file. The frontend
 //! (`src/agent/AgentSync.js`) subscribes to this event and handles the op.
-//!
-//! Protocol: see `CLAUDE_AGENT_PROTOCOL.md` §2 ("File layout").
 
 use std::path::{Path, PathBuf};
 use std::sync::mpsc;
@@ -24,7 +22,7 @@ pub const EVENT_NAME: &str = "agent-inbox:op";
 /// in settings, the JS snapshot writer will write there anyway, but the
 /// watcher currently only observes the default location. That's fine as
 /// long as the user hasn't customized the path; if they have, they'll also need
-/// to restart the app — documented in the design doc.
+/// to restart the app.
 pub fn inbox_dir(app: &AppHandle) -> Result<PathBuf, String> {
     let base = app
         .path()
@@ -75,7 +73,7 @@ fn run(app_handle: AppHandle) {
         }
     };
 
-    // Make sure the directory (and its siblings per protocol §2) exist so
+    // Make sure the directory (and its siblings) exist so
     // the watcher has something to attach to even on first launch.
     if let Err(e) = std::fs::create_dir_all(&inbox) {
         eprintln!("[agent-watcher] failed to create {inbox:?}: {e:?}");

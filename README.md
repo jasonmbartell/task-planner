@@ -205,7 +205,7 @@ This triggers a matrix build (Windows, macOS Intel + ARM, Linux) and creates a G
 
 ## Project Structure
 
-For the full breakdown of every file see [`CLAUDE.md`](CLAUDE.md). The high-level layout:
+The high-level layout:
 
 ```
 src/
@@ -328,7 +328,7 @@ Examples of the markdown shapes the deterministic parser accepts:
 - **Review-before-apply**: every candidate goes through a review pane with inline editors and per-row accept/reject toggles. Approved candidates are applied as one bulk envelope so a single Ctrl-Z reverts the whole import.
 - **Single source of truth**: IndexedDB is authoritative; ingestion does not write back. Tasks edited in the planner stay in the planner.
 
-The same pipeline is exposed to a Claude session via the `prose.ingest` op (see [`CLAUDE_AGENT_PROTOCOL.md`](CLAUDE_AGENT_PROTOCOL.md) §4.6) — the planner queues the extracted bulk for human review through the **Agent Inbox** sidebar entry.
+The same pipeline is exposed to a Claude session via the `prose.ingest` agent op — the planner queues the extracted bulk for human review through the **Agent Inbox** sidebar entry.
 
 ## License
 

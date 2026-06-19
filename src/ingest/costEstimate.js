@@ -11,7 +11,7 @@
  * accidentally pasting a 200KB transcript and burning $5 — not to predict
  * the bill to the cent. UI displays as "≈X tok · $0.YZ".
  *
- * Spec: docs/prose-ingestion.md §11 Q6 (cost gating).
+ * Implements the prose-ingest cost gate.
  */
 
 const CHARS_PER_TOKEN = 4;

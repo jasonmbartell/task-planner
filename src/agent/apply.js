@@ -2,7 +2,7 @@
  * Pure mutator for agent ops. Takes the current state slice
  * { projects, sprints, tasks } and a pre-validated, ID-assigned list of
  * atomic ops, and returns the next slice plus a diff suitable for the
- * archive `result.diff` envelope (CLAUDE_AGENT_PROTOCOL.md §6).
+ * archive `result.diff` envelope.
  *
  * Validation must run before this function — applyOps assumes every op is
  * shape-correct and references existing IDs (with intra-bulk forward refs

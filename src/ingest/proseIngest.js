@@ -17,8 +17,6 @@
  *   3. `applyIngestEnvelope(store, envelope)` — shims `_agentBulkApply` with
  *      `forceApply: true` (the user just reviewed them in the modal) and
  *      returns the result.
- *
- * Spec: docs/prose-ingestion.md §8a.
  */
 
 import { parseMarkdownIntelligent } from '../obsidian/parseOrchestrator.js';

@@ -12,8 +12,8 @@
  *      if no API key — extraction is LLM-only, no deterministic fallback).
  *   3. Run `parseMarkdownIntelligent({ inputShape: 'prose' })` to extract
  *      candidate tasks. `payload.inputShape` is informational only — the
- *      writing agent pre-converts spreadsheets to markdown tables (per
- *      protocol §8c), so the planner always treats `content` as prose.
+ *      writing agent pre-converts spreadsheets to markdown tables, so the
+ *      planner always treats `content` as prose.
  *   4. Build a `bulk` envelope of `task.add` children via the existing
  *      `buildIngestEnvelope` (shared with the in-app modal, M-P3).
  *   5. Return two outcomes:
@@ -23,9 +23,7 @@
  *          inbox UI surfaces it for human review.
  *
  * The handler does NOT auto-apply the spawned bulk — extraction
- * hallucinations should never silently mutate the store (protocol §5).
- *
- * Spec: docs/prose-ingestion.md §8b, CLAUDE_AGENT_PROTOCOL.md §4.6.
+ * hallucinations should never silently mutate the store.
  */
 
 import { parseMarkdownIntelligent } from '../obsidian/parseOrchestrator.js';

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Pre-push hook — refuses pushing a `claude/*` branch to `main` on the remote.
 #
-# Rationale (CLAUDE_AGENT_PROTOCOL.md §7): schema / agent-channel changes live
+# Rationale: schema / agent-channel changes live
 # on `claude/agent-*` feature branches. The maintainer reviews and merges into main;
 # the agent never pushes directly. This hook enforces that invariant on the
 # client side so a stray `git push origin HEAD:main` can't sneak through.
@@ -44,7 +44,7 @@ while read -r local_ref local_sha remote_ref remote_sha; do
 [pre-push] refusing push from '$local_branch' to '$remote_ref'.
 
 Claude agent branches (claude/*) must land on main via a reviewed PR,
-not a direct push. See CLAUDE_AGENT_PROTOCOL.md §7.
+not a direct push.
 
 To override for an emergency (don't — ask the maintainer instead):
   git push --no-verify <remote> <refspec>

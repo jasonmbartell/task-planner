@@ -7,7 +7,7 @@
  *   1. Read the inbox file (absolute path from the event payload).
  *   2. Parse JSON. If parse fails → archive a synthetic rejection.
  *   3. Call `_agentBulkApply(envelope)` on the store.
- *   4. Write the result envelope (per protocol §6) into
+ *   4. Write the result envelope into
  *      `agent-archive/{applied|queued|rejected}/`.
  *   5. Append a JSONL line to `agent-log/YYYY-MM-DD.jsonl`.
  *   6. Remove the inbox file.

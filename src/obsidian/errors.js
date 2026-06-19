@@ -10,8 +10,6 @@
  * not configured an LLM client. Prose extraction is LLM-only — there is no
  * deterministic fallback — so the UI should gate the ingest feature behind a
  * settings prompt when this fires.
- *
- * See docs/prose-ingestion.md §6.
  */
 export class ProseIngestionNoLlmError extends Error {
   constructor(message = 'Prose ingestion requires an LLM client; configure one in Settings.') {
@@ -22,16 +20,12 @@ export class ProseIngestionNoLlmError extends Error {
 
 /**
  * Thrown by `parseProse` and `spreadsheetToMarkdown` when the stub body has
- * not been filled in yet. Surfaced verbatim to the UI so the next Claude Code
- * session sees a loud pointer to the doc.
- *
- * Replace this with real behavior when implementing M-P1 / M-P4.
+ * not been filled in yet. Surfaced verbatim to the UI.
  */
 export class ProseIngestionNotImplementedError extends Error {
   constructor(fn) {
     super(
-      `${fn}() is scaffolded but not implemented. ` +
-      `See docs/prose-ingestion.md for the contract and the next milestone to land.`
+      `${fn}() is scaffolded but not implemented.`
     );
     this.name = 'ProseIngestionNotImplementedError';
   }

@@ -9,8 +9,7 @@
  * values on tasks the deterministic parser already identified. This prompt
  * does *extraction*: it draws task boundaries where none exist in the input.
  *
- * See docs/prose-ingestion.md §7 for the design and the rules the prompt
- * must enforce. This file is the first thing to tune when extraction
+ * This file is the first thing to tune when extraction
  * quality regresses — run scripts/prose-eval.mjs (future, M-P6) against the
  * held-out fixture set before and after any edit.
  */

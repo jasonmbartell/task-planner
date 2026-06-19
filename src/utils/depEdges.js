@@ -17,8 +17,6 @@
  * `dependencies: string[]`. Those are still accepted on input — bare
  * strings normalize to `hard-blocks` edges — so the migration and all
  * helpers here are idempotent.
- *
- * Spec: docs/claude-agent-integration.md §7 Milestone 3.5.
  */
 
 export const DEFAULT_EDGE_TYPE = 'hard-blocks';

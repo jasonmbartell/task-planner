@@ -3,7 +3,7 @@
  *
  * Queued ops land in `$PLANNER_DATA_DIR/agent-archive/queued/` via the
  * AgentSync apply path when the trust matrix or staleness check says
- * "don't auto-apply" (CLAUDE_AGENT_PROTOCOL.md §4.5, §5). This service
+ * "don't auto-apply". This service
  * watches that directory, exposes the envelopes to React via a pub-sub,
  * and implements the Approve / Reject transitions:
  *

@@ -6,8 +6,6 @@
  * purpose — the LLM prompt in `proseExtractionPrompt.js` maps them to fields
  * heuristically.
  *
- * Spec: docs/prose-ingestion.md §5
- *
  * SheetJS is loaded lazily so the ~1MB `xlsx` bundle is only fetched when a
  * spreadsheet is actually uploaded — the rest of the app pays no cost.
  */

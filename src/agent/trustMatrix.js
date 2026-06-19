@@ -1,7 +1,7 @@
 /**
  * Per-op-type trust decisions.
  *
- * Defaults match CLAUDE_AGENT_PROTOCOL.md §5. The user can override via
+ * The user can override the defaults via
  * `obsidianConfig.agentTrust` (a partial map keyed by op type → 'auto' | 'queue').
  * For `bulk` envelopes the decision is the strictest of its children:
  * any single child queued ⇒ the whole bulk queues.

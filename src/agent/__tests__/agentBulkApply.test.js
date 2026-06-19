@@ -140,7 +140,7 @@ describe('_agentBulkApply', () => {
     expect(result.error.kind).toBe('unknown_type');
   });
 
-  it('queued: task.delete defaults to queue per protocol §5', () => {
+  it('queued: task.delete defaults to queue', () => {
     const before = JSON.stringify(useStore.getState().tasks);
     const result = useStore.getState()._agentBulkApply({
       opId: 'op-8', type: 'task.delete',

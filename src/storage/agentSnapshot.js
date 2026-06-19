@@ -2,9 +2,7 @@
  * Agent snapshot: canonical, read-only JSON export the planner writes
  * for Claude (or any other agent) to read before composing an op.
  *
- * Shape contract lives in CLAUDE_AGENT_PROTOCOL.md §3. If this file
- * disagrees with the protocol doc, update the doc — the code is
- * authoritative, but both must match before an op is accepted.
+ * This file is the authoritative shape contract for the agent snapshot.
  */
 
 import { normalizeDeps } from '../utils/depEdges.js';

@@ -3,7 +3,7 @@
  *
  * Every op processed by `AgentSync._processInbox` (and every approve/reject
  * from `AgentInboxService`) appends one line to `agent-log/YYYY-MM-DD.jsonl`
- * containing the full archived envelope (CLAUDE_AGENT_PROTOCOL.md §6). The
+ * containing the full archived envelope. The
  * digest surface reads those files for today + the previous N days and
  * presents a coherent "what did Claude do overnight?" view.
  *

@@ -5,13 +5,11 @@
  * browser build there's no filesystem to watch, so a web user / LLM has to
  * hand the user an op bundle that they paste or drop here. This service parses
  * the bundle, runs each envelope through `_agentBulkApply`, and returns the
- * result envelopes in the same shape the desktop archive writes (protocol §6)
+ * result envelopes in the same shape the desktop archive writes
  * so the download is drop-in swappable with a Tauri `agent-archive/` entry.
  *
  * Pure-ish — no I/O. All store interaction goes through the injected
  * `_agentBulkApply`, which vitest can double.
- *
- * Spec: CLAUDE_AGENT_PROTOCOL.md §4 (envelope shape) and §6 (result block).
  */
 
 /** Shape of a single parsed-but-not-yet-run envelope, ready for _agentBulkApply. */
@@ -115,7 +113,7 @@ export function parseBundleText(text, { now = Date.now(), genId = null } = {}) {
 }
 
 /**
- * Build the protocol §6 result block for one envelope + apply result. Mirrors
+ * Build the result block for one envelope + apply result. Mirrors
  * the logic in AgentSync._buildArchivedEnvelope so the browser download is
  * indistinguishable from a desktop archive entry.
  */

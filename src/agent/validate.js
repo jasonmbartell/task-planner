@@ -4,8 +4,6 @@
  * Pure functions only — no store, no I/O. Consumed by the store's
  * `_agentBulkApply` action and by `AgentSync` when archiving rejections
  * for malformed inbox files.
- *
- * Spec: CLAUDE_AGENT_PROTOCOL.md §4 (op envelope) and §4.5 (rejection kinds).
  */
 
 import { canonicalEdgeType, normalizeDeps, hardTargets } from '../utils/depEdges.js';
@@ -252,8 +250,8 @@ function validateTaskDates(t) {
 /**
  * Walk the bulk in order against a mutable shadow of state, so that intra-bulk
  * references (forward IDs, cascades) are resolved correctly. Aborts on first
- * error (matches protocol §4.2: "applied as one undo-checkpoint; aborts on
- * first validation error").
+ * error: the bulk is applied as one undo-checkpoint and aborts on the
+ * first validation error.
  *
  * Caller must have already run `assignMissingIds` so add-ops have stable IDs.
  *
@@ -432,7 +430,7 @@ export function validateBulk(ops, state) {
 
 /**
  * Returns true if any op targets an entity whose `updatedAt > basedOn`.
- * Stale ops are queued (not rejected) per protocol §4.5 — the human resolves.
+ * Stale ops are queued (not rejected) — the human resolves.
  */
 export function checkStaleness(ops, state, basedOn) {
   if (typeof basedOn !== 'number') return false;

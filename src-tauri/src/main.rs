@@ -52,7 +52,7 @@ fn main() {
                 })
                 .build(app)?;
 
-            // Spawn the agent inbox watcher (see CLAUDE_AGENT_PROTOCOL.md §2).
+            // Spawn the agent inbox watcher.
             // Runs on its own OS thread; failures are logged and non-fatal.
             agent_watcher::spawn(app.handle().clone());
 

@@ -62,26 +62,7 @@ See the [README](README.md) for a full file tree. Key areas:
 3. Run `npm run build` to verify the production build succeeds
 4. Open a pull request with a clear description of what changed and why
 
-## Working as Claude in this repo
-
-This repo has a formal Claude-as-developer channel. If you're a Claude session
-editing code (not just operating task data through the agent inbox), read:
-
-- [`CLAUDE_AGENT_PROTOCOL.md`](CLAUDE_AGENT_PROTOCOL.md) — authoritative op
-  spec and §7 developer-channel rules
-- [`docs/claude-agent-integration.md`](docs/claude-agent-integration.md) —
-  design rationale and milestone tracker
-- [`CLAUDE_WORKLOG.md`](CLAUDE_WORKLOG.md) — append-only friction log
-
-Two developer-channel niceties live in `scripts/`:
-
-```bash
-npm run hooks:install   # points core.hooksPath at scripts/hooks so the
-                        # pre-push guard refuses `claude/* → main` pushes
-npm run agent:worklog -- <slug> <session-type>
-                        # stamps a dated scaffold entry at the top of the
-                        # Entries section in CLAUDE_WORKLOG.md
-```
+## Migrations
 
 Migrations added to `src/storage/migrations.js` must be idempotent. There's a
 vitest guard in `src/storage/__tests__/migrations-idempotency.test.js` — add a

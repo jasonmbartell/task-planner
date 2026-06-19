@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { decide, decideForBulk, DEFAULT_TRUST } from '../trustMatrix.js';
 
 describe('trustMatrix.decide', () => {
-  it('returns the documented protocol §5 defaults', () => {
+  it('returns the documented trust defaults', () => {
     expect(decide('task.add')).toBe('auto');
     expect(decide('task.update')).toBe('auto');
     expect(decide('task.delete')).toBe('queue');

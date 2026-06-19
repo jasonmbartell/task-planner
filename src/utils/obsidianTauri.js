@@ -181,8 +181,7 @@ export async function appendAgentFile(relPath, contents, plannerDataPath) {
   const dest = await join(root, normalized);
 
   // tauri-plugin-fs supports `{ append: true }`. If the file doesn't exist,
-  // it's created. Single-writer append-only is safe per the design doc §8
-  // ("Single-writer append-only log is trivially safe").
+  // it's created. Single-writer append-only is trivially safe.
   await writeTextFile(dest, contents, { append: true });
   return dest;
 }

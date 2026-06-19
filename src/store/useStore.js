@@ -443,8 +443,6 @@ const useStore = create(
        * UI's "approve" button) and the staleness queue. Validation errors
        * are still hard-rejected — `forceApply` is not "ignore safety", just
        * "ignore trust + freshness".
-       *
-       * Spec: CLAUDE_AGENT_PROTOCOL.md §4–§6.
        */
       _agentBulkApply: (envelope, { forceApply = false, now = Date.now() } = {}) => {
         const envCheck = validateEnvelope(envelope);

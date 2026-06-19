@@ -6,8 +6,6 @@
  * parseMarkdownFile returns, so downstream orchestrator stages (flatten →
  * defaults → date-infer → dep-ref resolution) run unchanged.
  *
- * Spec: docs/prose-ingestion.md
- *
  * Shape of a candidate task (ProseCandidateTask):
  *   - All normal task fields (id, title, description, dueDate, urgency, ...)
  *   - _sourcePointer: { source, lineStart, lineEnd, rawText }  // provenance
@@ -19,7 +17,7 @@
  * Every task extracted from a single chunk shares that chunk's lineStart /
  * lineEnd / rawText. Snippet-level precision would require asking the LLM
  * for verbatim quotes (or accurate line counts, which models are bad at)
- * and is left as a P3i upgrade per docs/prose-ingestion.md §11 Q1.
+ * and is left as a future upgrade.
  */
 
 import { genId } from '../utils/ids.js';
