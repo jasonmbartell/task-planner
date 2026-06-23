@@ -56,19 +56,29 @@ export async function writeAgentFile(relPath, contents, plannerDataPath) {
     await mkdir(await join(root, normalized.slice(0, lastSlash)), { recursive: true }).catch(() => {});
   }
 
-  // Atomic write: temp file + rename. If rename fails (e.g. dest held open
-  // by an antivirus scanner on Windows), fall back to direct overwrite so
-  // the snapshot is never missing for long.
+  // Atomic write: write the full body to a temp file, then rename() it over
+  // the destination. The Tauri fs plugin's rename maps to std::fs::rename,
+  // which atomically REPLACES an existing file on both Windows and Unix — it
+  // swaps the directory entry, it does not overwrite bytes in place. That's
+  // what prevents the "a shorter export leaves the previous body's tail (plus
+  // NUL padding) behind" corruption: a smaller new body can never leave the
+  // larger old body's tail, because the old file is unlinked wholesale rather
+  // than partially overwritten. It also closes the partial-read window a
+  // reader (the agent) could otherwise hit mid-write.
+  //
+  // We deliberately do NOT remove(dest) before the rename. rename already
+  // replaces it, and removing first would open a window where snapshot.json
+  // briefly doesn't exist — the missing-file/partial-read risk we're avoiding.
   const tmp = `${dest}.tmp`;
   await writeTextFile(tmp, contents);
   try {
-    if (await exists(dest)) {
-      // rename on Windows fails if the destination exists; remove first.
-      await remove(dest).catch(() => {});
-    }
     await rename(tmp, dest);
   } catch (err) {
-    console.warn(`[obsidian/tauri] atomic rename failed for ${dest}, falling back to direct write:`, err);
+    // rename can still fail if dest is held open without FILE_SHARE_DELETE
+    // (e.g. an AV scanner on Windows). Fall back to a direct write; the plugin
+    // opens with truncate by default, so even this path can't leave a stale
+    // tail — it just isn't atomic.
+    console.warn(`[obsidian/tauri] atomic rename failed for ${dest}, falling back to direct truncating write:`, err);
     await writeTextFile(dest, contents);
     await remove(tmp).catch(() => {});
   }
